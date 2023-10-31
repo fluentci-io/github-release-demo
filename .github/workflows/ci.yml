@@ -8,6 +8,11 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        extensions:
+          - tar.gz
+          - tar.gz.sha256
     steps:
       - uses: actions/checkout@v3
       - uses: denoland/setup-deno@v1
@@ -26,15 +31,9 @@ jobs:
         run: fluentci run . build
         env:
           TAG: ${{ env.RELEASE_VERSION }}
-      - name: Upload release asset (tar.gz)
+      - name: Upload release assets
         run: fluentci run . release_upload
         env:
           TAG: ${{ env.RELEASE_VERSION }}
-          FILE: /assets/hello_${{ env.RELEASE_VERSION }}_x86_64-unknown-linux-gnu.tar.gz
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Upload release asset (sha256)
-        run: fluentci run . release_upload
-        env:
-          TAG: ${{ env.RELEASE_VERSION }}
-          FILE: /assets/hello_${{ env.RELEASE_VERSION }}_x86_64-unknown-linux-gnu.tar.gz.sha256
+          FILE: /assets/hello_${{ env.RELEASE_VERSION }}_x86_64-unknown-linux-gnu.${{ matrix.extensions }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
