@@ -1,3 +1,7 @@
-import { releaseUpload } from "https://pkg.fluentci.io/github_pipeline@v0.1.0/mod.ts";
+import {
+  build,
+  test,
+} from "https://pkg.fluentci.io/rust_pipeline@v0.8.4/mod.ts";
 
-await releaseUpload();
+await test();
+await build();

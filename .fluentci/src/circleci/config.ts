@@ -3,7 +3,7 @@ import { CircleCI, Job } from "fluent_circleci";
 export function generateYaml(): CircleCI {
   const circleci = new CircleCI();
 
-  const base = new Job().machine({ image: "ubuntu-2004:2023.07.1" }).steps([
+  const tests = new Job().machine({ image: "ubuntu-2004:2023.07.1" }).steps([
     "checkout",
     {
       run: "sudo apt-get update && sudo apt-get install -y curl unzip",
@@ -19,19 +19,19 @@ export PATH="$DENO_INSTALL/bin:$PATH"`,
     },
     {
       run: `\
-curl -L https://dl.dagger.io/dagger/install.sh | DAGGER_VERSION=0.8.1 sh
+curl -L https://dl.dagger.io/dagger/install.sh | DAGGER_VERSION=0.9.3 sh
 sudo mv bin/dagger /usr/local/bin
 dagger version`,
     },
     {
       run: {
         name: "Run Dagger Pipelines",
-        command: "fluentci run .",
+        command: "fluentci run rust_pipeline test build",
       },
     },
   ]);
 
-  circleci.jobs({ base }).workflow("dagger", ["base"]);
+  circleci.jobs({ tests }).workflow("dagger", ["tests"]);
 
   return circleci;
 }

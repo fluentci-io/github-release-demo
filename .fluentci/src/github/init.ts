@@ -1,3 +1,3 @@
 import { generateYaml } from "./config.ts";
 
-generateYaml().save(".github/workflows/release.yml");
+generateYaml().save(".github/workflows/tests.yml");

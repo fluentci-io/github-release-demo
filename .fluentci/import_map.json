@@ -9,13 +9,13 @@
     "fluent_circleci": "https://deno.land/x/fluent_circleci@v0.2.5/mod.ts",
     "fluent_azure_pipelines": "https://deno.land/x/fluent_azure_pipelines@v0.2.0/mod.ts",
     "fluent_aws_codepipeline": "https://deno.land/x/fluent_aws_codepipeline@v0.2.3/mod.ts",
-    "url": "node:url",
-    "readline": "node:readline",
-    "process": "node:process",
-    "path": "node:path",
-    "os": "node:os",
+    "crypto": "node:crypto",
     "fs": "node:fs",
-    "crypto": "node:crypto"
+    "os": "node:os",
+    "path": "node:path",
+    "process": "node:process",
+    "readline": "node:readline",
+    "url": "node:url"
   },
   "scopes": {
     "https://esm.sh/v128/": {
